@@ -6,7 +6,6 @@ import React from 'react';
  * Validate Field -> password: isEmpty, minLength(6)
  */
 
-export const Login: React.FC = () => {
+export const Login = () => {
   return <div>login</div>;
 };
-

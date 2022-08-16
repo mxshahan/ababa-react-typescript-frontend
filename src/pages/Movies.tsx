@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-export const Movie: React.FC = () => {
-  return (
-    <div>Movie</div>
-  )
-}
+export const Movie = () => {
+  return <div>Movie</div>;
+};
