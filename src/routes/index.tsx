@@ -1,13 +1,29 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Login, Movie } from '../pages';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "../container/Layout";
+import { Login, Movie, NotFound } from "../pages";
+import { Register } from "../pages/Auth/Register";
+import { Dashboard } from "../pages/Dashboard";
+import { AuthRoutes } from "./AuthRoutes";
+import { PrivateRoutes } from "./PrivateRoutes";
 
-const AppRouter: React.FC = (props) => {
+const AppRouter: React.FC = () => {
   return (
-    <Routes>
-      <Route path="" element={<Movie />} />
-      <Route path="login" element={<Login />} />
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route index element={<Dashboard />} />
+          <Route path="movie" element={<Movie />} />
+        </Route>
+
+        <Route element={<AuthRoutes />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Layout>
   );
 };
 
