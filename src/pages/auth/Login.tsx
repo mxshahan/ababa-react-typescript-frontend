@@ -1,7 +1,7 @@
 import React, { BaseSyntheticEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { LoginRequest } from "../../dto";
-import { RequestError } from "../../interfaces";
+import { LoginRequest } from "../../interfaces/dto";
+import { RequestError } from "../../interfaces/models";
 import { useLoginMutation } from "../../store/apis/auth.api";
 import formStyle from "../../styles/form.module.scss";
 
@@ -59,7 +59,7 @@ export const Login = () => {
 
         {isError && (
           <span className="block bg-red-100 rounded-md p-2 mt-4">
-            <p className="text-center text-red-600">{ApiError.data.message}</p>
+            <p className="text-center text-red-600">{ApiError.data.message || "Something went wrong"}</p>
           </span>
         )}
         <div className="flex items-center">

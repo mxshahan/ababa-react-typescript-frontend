@@ -6,7 +6,7 @@ interface SidebarType {
   label: string;
   path: string;
   icon?: React.ReactElement;
-  exact?: boolean
+  exact?: boolean;
 }
 
 const sidebar: SidebarType[] = [
@@ -14,11 +14,11 @@ const sidebar: SidebarType[] = [
     label: "Dashboard",
     path: "/",
     icon: <FaBeer />,
-    exact: true
+    exact: true,
   },
   {
-    label: "Movie",
-    path: "/movie",
+    label: "Movies",
+    path: "/movies",
     icon: <FaBeer />,
   },
   {
@@ -30,9 +30,9 @@ const sidebar: SidebarType[] = [
 
 export const Sidebar = () => {
   return (
-    <div className="h-screen bg-slate-900 w-60">
+    <div className={` bg-slate-900 w-60 ${style.sidebar}  `}>
       {sidebar.map((s: SidebarType) => (
-        <NavLink className={(isActive) => (isActive ? style.navLink : style.navLink.active)} to={s.path}>
+        <NavLink key={s.path} className={(isActive) => (isActive ? style.navLink : style.navLink.active)} to={s.path}>
           {s.icon} {s.label}
         </NavLink>
       ))}

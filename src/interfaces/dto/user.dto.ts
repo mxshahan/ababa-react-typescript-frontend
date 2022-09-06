@@ -1,5 +1,4 @@
 export interface RegisterUserRequest {
-  _id: string;
   email: string;
 }
 

@@ -1,19 +1,18 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Layout } from "../container/Layout";
-import { Login, Movie, NotFound } from "../pages";
-import { Register } from "../pages/Auth/Register";
-import { Dashboard } from "../pages/Dashboard";
+import { Wrapper } from "../container/Wrapper";
 import { AuthRoutes } from "./AuthRoutes";
 import { PrivateRoutes } from "./PrivateRoutes";
+import { Login, Movies, NotFound, Register } from "../pages";
+import { Favourites } from "../pages/Favourite";
 
 const AppRouter: React.FC = () => {
   return (
-    <Layout>
+    <Wrapper>
       <Routes>
         <Route element={<PrivateRoutes />}>
-          <Route index element={<Dashboard />} />
-          <Route path="movie" element={<Movie />} />
+          <Route index element={<Movies />} />
+          <Route path="favs" element={<Favourites />} />
         </Route>
 
         <Route element={<AuthRoutes />}>
@@ -23,7 +22,7 @@ const AppRouter: React.FC = () => {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </Layout>
+    </Wrapper>
   );
 };
 

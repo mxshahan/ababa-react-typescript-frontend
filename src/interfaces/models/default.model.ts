@@ -1,6 +1,6 @@
 export interface ActionType {
   type: string;
-  payload: any;
+  payload?: any;
 }
 
 export interface RequestError {
@@ -10,4 +10,9 @@ export interface RequestError {
     statusCode: number;
   };
   status: number;
+}
+
+export interface DefaultResponse {
+  success: boolean;
+  message: string;
 }

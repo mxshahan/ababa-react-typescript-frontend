@@ -1,26 +1,37 @@
 import { Action, combineReducers, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import { authApi } from "./apis/auth.api";
-import authSlice from "./slices/auth.slice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+import { authApi } from "./apis/auth.api";
+import { favouriteApi } from "./apis/favourite.api";
+import { movieApi } from "./apis/movie.api";
+import AuthSlice from "./slices/auth.slice";
+
 const persistConfig = {
-  key: "root",
+  key: AuthSlice.name,
   storage,
-  whitelist: [authSlice.name],
 };
 
 const rootReducer = combineReducers({
+  // API's
   [authApi.reducerPath]: authApi.reducer,
-  [authSlice.name]: authSlice.reducer,
+  [movieApi.reducerPath]: movieApi.reducer,
+  [favouriteApi.reducerPath]: favouriteApi.reducer,
+
+  // Slices
+  [AuthSlice.name]: persistReducer(persistConfig, AuthSlice.reducer),
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+//
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   devTools: process.env.NODE_ENV !== "production",
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat(authApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false })
+      .concat(authApi.middleware)
+      .concat(movieApi.middleware)
+      .concat(movieApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

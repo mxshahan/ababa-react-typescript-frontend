@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { MovieCard } from "../components/Pages/Movies/MovieCard";
 import { Pagination } from "../components/Pagination/component";
-import { Movie } from "../interfaces/models";
-import { useGetMoviesQuery } from "../store/apis/movie.api";
+import { Favourite } from "../interfaces/models/favourite.model";
+import { useGetMyFavouritesQuery } from "../store/apis/favourite.api";
 
-export const Movies = () => {
+export const Favourites = () => {
   const [page, setPage] = useState<number>(1);
   const [limit] = useState<number>(30);
 
-  const { data, refetch, isLoading } = useGetMoviesQuery({
+  const { data, refetch, isLoading } = useGetMyFavouritesQuery({
     page,
     limit,
     sort: "createdAt,desc",
@@ -33,8 +33,8 @@ export const Movies = () => {
       ) : (
         <>
           <div className="grid lg:grid-cols-6 md:grid-cols-4 gap-5">
-            {data?.entries.map((movie: Movie) => (
-              <MovieCard key={movie._id} movie={movie} isFav={movie.isFav} />
+            {data?.entries.map((fav: Favourite) => (
+              <MovieCard key={fav._id} movie={fav.movie} isFav={true} />
             ))}
           </div>
           <div className="py-10 text-center">

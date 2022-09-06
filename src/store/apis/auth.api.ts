@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { LoginResponse } from "../../interfaces";
-import { LoginRequest, RegisterUserRequest } from "../../dto";
+import { DefaultResponse, LoginResponse } from "../../interfaces/models";
+import { LoginRequest, RegisterUserRequest } from "../../interfaces/dto";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -22,7 +22,13 @@ export const authApi = createApi({
         body: registerUserRequest,
       }),
     }),
+    logout: build.mutation<DefaultResponse, void>({
+      query: () => ({
+        url: "logout",
+        method: "POST",
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApi;
