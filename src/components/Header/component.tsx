@@ -35,6 +35,7 @@ export const Header = () => {
       <div className="flex flex-row gap-10 ml-5 mr-5">
         {menu.map((s: Menu) => (
           <NavLink
+            end
             key={s.path}
             className={({ isActive }) => {
               let className = "flex items-center gap-2 text-white  ";
